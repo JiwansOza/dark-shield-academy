@@ -72,6 +72,7 @@ export default {
 					'white-muted': '#F5F5F5',
 					gray: '#333333',
 					'gray-light': '#555555',
+					'gray-dark': '#272727',
 				}
 			},
 			borderRadius: {

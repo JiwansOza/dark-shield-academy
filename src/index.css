@@ -107,7 +107,7 @@
   }
 
   .cyber-button {
-    @apply relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-medium transition-all bg-cyber-black border border-cyber-red/30 rounded-md group-hover:bg-dark-700;
+    @apply relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-medium transition-all bg-cyber-black border border-cyber-red/30 rounded-md hover:bg-cyber-gray;
   }
 
   .cyber-button:hover {
@@ -117,6 +117,6 @@
 
   .cyber-button::before {
     content: '';
-    @apply absolute top-0 left-0 w-0 h-full bg-cyber-red opacity-10 -skew-x-12 transition-all ease-out duration-500 group-hover:w-full group-hover:skew-x-0;
+    @apply absolute top-0 left-0 w-0 h-full bg-cyber-red opacity-10 -skew-x-12 transition-all ease-out duration-500 hover:w-full hover:skew-x-0;
   }
 }
