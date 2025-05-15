@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				cyber: {
+					blue: '#1EAEDB',
+					'blue-dark': '#0A7DA9',
+					green: '#39FF14',
+					'green-dark': '#29CF04',
+					black: '#121212',
+					'black-light': '#1A1A1A',
+					white: '#FFFFFF',
+					'white-muted': '#F5F5F5',
 				}
 			},
 			borderRadius: {
@@ -84,11 +95,67 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-out': {
+					'0%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					},
+					'100%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					}
+				},
+				'glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 5px 2px rgba(57, 255, 20, 0.3)'
+					},
+					'50%': {
+						boxShadow: '0 0 20px 5px rgba(57, 255, 20, 0.5)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
+				},
+				'matrix': {
+					'0%': {
+						backgroundPosition: '0% 0%'
+					},
+					'100%': {
+						backgroundPosition: '100% 100%'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out',
+				'fade-out': 'fade-out 0.5s ease-out',
+				'glow': 'glow 3s ease-in-out infinite',
+				'float': 'float 5s ease-in-out infinite',
+				'matrix': 'matrix 20s linear infinite'
+			},
+			backgroundImage: {
+				'cyber-grid': 'linear-gradient(rgba(30, 174, 219, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(30, 174, 219, 0.1) 1px, transparent 1px)',
+				'matrix-pattern': 'linear-gradient(0deg, rgba(57, 255, 20, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(57, 255, 20, 0.1) 1px, transparent 1px)'
+			},
+			backgroundSize: {
+				'cyber-grid': '25px 25px',
 			}
 		}
 	},
