@@ -2,9 +2,21 @@
 import { Link } from "react-router-dom";
 import { Shield, Lock, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const Hero = () => {
+  const scrollRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: scrollRef,
+    offset: ["start start", "end start"]
+  });
+  
+  // Parallax effect values
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const gridOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
   const scrollToNextSection = () => {
     const coursesSection = document.getElementById("courses");
     if (coursesSection) {
@@ -12,26 +24,70 @@ const Hero = () => {
     }
   };
 
+  // Binary data pattern effect
+  const binaryPatterns = Array(8).fill(0).map((_, i) => (
+    <motion.div 
+      key={`binary-${i}`}
+      className="absolute text-cyber-red/10 text-xs font-mono whitespace-nowrap select-none"
+      initial={{
+        x: Math.random() * 100 - 50 + "%",
+        y: Math.random() * 100 + "%",
+        opacity: 0.2 + Math.random() * 0.3
+      }}
+      animate={{
+        y: ["0%", "100%"],
+        opacity: [0.2, 0.4, 0.2],
+      }}
+      transition={{
+        duration: 20 + Math.random() * 30,
+        repeat: Infinity,
+        ease: "linear"
+      }}
+      style={{ left: `${i * 12.5}%` }}
+    >
+      {Array(40).fill(0).map(() => Math.round(Math.random())).join('')}
+    </motion.div>
+  ));
+
+  // Floating forensic evidence elements
+  const forensicElements = [
+    { icon: "🔍", title: "Analysis" },
+    { icon: "🖥️", title: "Digital" },
+    { icon: "🔒", title: "Security" },
+    { icon: "📊", title: "Data" },
+    { icon: "⚖️", title: "Evidence" }
+  ];
+
   return (
-    <div className="relative min-h-[92vh] flex items-center overflow-hidden noise-bg">
-      {/* Background with matrix effect */}
-      <div className="absolute inset-0 cybersecurity-grid bg-matrix-pattern opacity-30"></div>
+    <div ref={scrollRef} className="relative min-h-[92vh] flex items-center overflow-hidden noise-bg">
+      {/* Parallax Background with matrix effect */}
+      <motion.div 
+        className="absolute inset-0 cybersecurity-grid bg-matrix-pattern opacity-30"
+        style={{ y: backgroundY }}
+      />
       
-      {/* Animated cyber nodes */}
+      {/* Binary data flow effect */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(6)].map((_, i) => (
+        {binaryPatterns}
+      </div>
+
+      {/* Cyber network nodes */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-cyber-red rounded-full"
+            className={`absolute w-${2 + Math.floor(Math.random() * 3)} h-${2 + Math.floor(Math.random() * 3)} bg-cyber-red rounded-full`}
             initial={{ 
               x: Math.random() * window.innerWidth, 
               y: Math.random() * window.innerHeight,
-              opacity: 0.4 + Math.random() * 0.6
+              opacity: 0.4 + Math.random() * 0.6,
+              scale: 0.8 + Math.random() * 0.4
             }}
             animate={{ 
               x: Math.random() * window.innerWidth, 
               y: Math.random() * window.innerHeight,
-              opacity: [0.4, 0.8, 0.4]
+              opacity: [0.4, 0.8, 0.4],
+              scale: [1, 1.2, 1]
             }}
             transition={{ 
               repeat: Infinity, 
@@ -42,11 +98,71 @@ const Hero = () => {
         ))}
       </div>
       
+      {/* Connecting lines for network simulation */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none">
+        <motion.path 
+          d="M100,100 C200,200 300,100 400,300" 
+          stroke="rgba(234, 56, 76, 0.2)" 
+          strokeWidth="1"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 0.6 }}
+          transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+        />
+        <motion.path 
+          d="M500,200 C300,300 200,400 100,500" 
+          stroke="rgba(234, 56, 76, 0.2)" 
+          strokeWidth="1"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 0.6 }}
+          transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", delay: 1 }}
+        />
+        <motion.path 
+          d="M700,100 C600,300 500,200 400,400" 
+          stroke="rgba(234, 56, 76, 0.2)" 
+          strokeWidth="1"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 0.6 }}
+          transition={{ duration: 3.5, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
+        />
+      </svg>
+      
+      {/* Floating forensic elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {forensicElements.map((element, i) => (
+          <motion.div
+            key={i}
+            className="absolute flex items-center justify-center"
+            initial={{ 
+              x: 100 + (i * 200) + Math.random() * 100, 
+              y: 100 + Math.random() * 400,
+              scale: 0.8
+            }}
+            animate={{ 
+              y: ["0%", "5%", "0%", "-5%", "0%"],
+              scale: [0.8, 1, 0.8]
+            }}
+            transition={{ 
+              repeat: Infinity, 
+              duration: 5 + i,
+              ease: "easeInOut"
+            }}
+          >
+            <div className="bg-cyber-black/70 border border-cyber-red/20 rounded-full p-4 backdrop-blur-sm">
+              <div className="text-2xl">{element.icon}</div>
+              <div className="text-xs text-cyber-red mt-1 text-center">{element.title}</div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      
       {/* Overlay gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-cyber-black via-cyber-black/90 to-cyber-black"></div>
       
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10">
+      <motion.div 
+        className="container mx-auto px-4 relative z-10"
+        style={{ y: textY }}
+      >
         <div className="flex flex-col items-center text-center">
           <motion.div 
             className="inline-flex items-center justify-center p-4 bg-cyber-red/10 rounded-full mb-8 cyber-glow"
@@ -119,7 +235,7 @@ const Hero = () => {
             </Link>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
       
       {/* Scroll indicator */}
       <motion.div 
@@ -139,14 +255,32 @@ const Hero = () => {
         </motion.div>
       </motion.div>
       
-      {/* Grid lines */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute left-1/4 top-0 bottom-0 w-px bg-cyber-red/5"></div>
-        <div className="absolute left-2/4 top-0 bottom-0 w-px bg-cyber-red/5"></div>
-        <div className="absolute left-3/4 top-0 bottom-0 w-px bg-cyber-red/5"></div>
-        <div className="absolute top-1/4 left-0 right-0 h-px bg-cyber-red/5"></div>
-        <div className="absolute top-2/4 left-0 right-0 h-px bg-cyber-red/5"></div>
-        <div className="absolute top-3/4 left-0 right-0 h-px bg-cyber-red/5"></div>
+      {/* Grid lines with parallax */}
+      <motion.div 
+        className="absolute inset-0 pointer-events-none" 
+        style={{ opacity: gridOpacity }}
+      >
+        <motion.div className="absolute left-1/4 top-0 bottom-0 w-px bg-cyber-red/5"></motion.div>
+        <motion.div className="absolute left-2/4 top-0 bottom-0 w-px bg-cyber-red/5"></motion.div>
+        <motion.div className="absolute left-3/4 top-0 bottom-0 w-px bg-cyber-red/5"></motion.div>
+        <motion.div className="absolute top-1/4 left-0 right-0 h-px bg-cyber-red/5"></motion.div>
+        <motion.div className="absolute top-2/4 left-0 right-0 h-px bg-cyber-red/5"></motion.div>
+        <motion.div className="absolute top-3/4 left-0 right-0 h-px bg-cyber-red/5"></motion.div>
+      </motion.div>
+
+      {/* Digital fingerprint scan effect */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 opacity-20 bg-gradient-to-r from-transparent via-cyber-red/30 to-transparent">
+        <motion.div 
+          className="h-full w-1 bg-cyber-red"
+          animate={{ 
+            x: ["0%", "100%", "0%"],
+          }}
+          transition={{ 
+            duration: 8, 
+            ease: "linear", 
+            repeat: Infinity 
+          }}
+        />
       </div>
     </div>
   );
