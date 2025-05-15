@@ -15,13 +15,13 @@ const Hero = () => {
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center justify-center p-2 bg-cyber-blue/10 rounded-full mb-6 animate-float">
-            <Shield className="h-10 w-10 text-cyber-blue" />
+          <div className="inline-flex items-center justify-center p-2 bg-cyber-red/10 rounded-full mb-6 animate-float">
+            <Shield className="h-10 w-10 text-cyber-red" />
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
             <span className="block">Empowering</span>
-            <span className="text-cyber-blue text-glow-blue">Digital Defenders</span>
+            <span className="text-cyber-red text-glow-red">Digital Defenders</span>
           </h1>
           
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mb-12">
@@ -30,13 +30,13 @@ const Hero = () => {
           
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
             <Link to="/courses">
-              <Button className="bg-cyber-blue hover:bg-cyber-blue-dark text-white px-8 py-6 text-lg rounded-md cyber-border transition-all hover:scale-105">
+              <Button className="bg-cyber-red hover:bg-cyber-red-dark text-white px-8 py-6 text-lg rounded-md cyber-border transition-all hover:scale-105">
                 <Lock className="mr-2 h-5 w-5" />
                 Explore Courses
               </Button>
             </Link>
             <Link to="/certifications">
-              <Button variant="outline" className="bg-transparent border border-cyber-blue text-cyber-blue hover:bg-cyber-blue/10 px-8 py-6 text-lg rounded-md transition-all hover:scale-105">
+              <Button variant="outline" className="bg-transparent border border-cyber-red text-cyber-red hover:bg-cyber-red/10 px-8 py-6 text-lg rounded-md transition-all hover:scale-105">
                 Get Certified
               </Button>
             </Link>
@@ -47,9 +47,9 @@ const Hero = () => {
       {/* Animated dots */}
       <div className="absolute bottom-10 left-0 right-0 flex justify-center">
         <div className="flex space-x-2">
-          <span className="w-2 h-2 rounded-full bg-cyber-blue animate-pulse"></span>
-          <span className="w-2 h-2 rounded-full bg-cyber-blue animate-pulse delay-150"></span>
-          <span className="w-2 h-2 rounded-full bg-cyber-blue animate-pulse delay-300"></span>
+          <span className="w-2 h-2 rounded-full bg-cyber-red animate-pulse"></span>
+          <span className="w-2 h-2 rounded-full bg-cyber-red animate-pulse delay-150"></span>
+          <span className="w-2 h-2 rounded-full bg-cyber-red animate-pulse delay-300"></span>
         </div>
       </div>
     </div>

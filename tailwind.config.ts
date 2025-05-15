@@ -64,14 +64,14 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				cyber: {
-					blue: '#1EAEDB',
-					'blue-dark': '#0A7DA9',
-					green: '#39FF14',
-					'green-dark': '#29CF04',
-					black: '#121212',
-					'black-light': '#1A1A1A',
+					red: '#EA384C',
+					'red-dark': '#D12030',
+					black: '#1A1F2C',
+					'black-light': '#222222',
 					white: '#FFFFFF',
 					'white-muted': '#F5F5F5',
+					gray: '#333333',
+					'gray-light': '#555555',
 				}
 			},
 			borderRadius: {
@@ -118,10 +118,10 @@ export default {
 				},
 				'glow': {
 					'0%, 100%': {
-						boxShadow: '0 0 5px 2px rgba(57, 255, 20, 0.3)'
+						boxShadow: '0 0 5px 2px rgba(234, 56, 76, 0.3)'
 					},
 					'50%': {
-						boxShadow: '0 0 20px 5px rgba(57, 255, 20, 0.5)'
+						boxShadow: '0 0 20px 5px rgba(234, 56, 76, 0.5)'
 					}
 				},
 				'float': {
@@ -151,8 +151,8 @@ export default {
 				'matrix': 'matrix 20s linear infinite'
 			},
 			backgroundImage: {
-				'cyber-grid': 'linear-gradient(rgba(30, 174, 219, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(30, 174, 219, 0.1) 1px, transparent 1px)',
-				'matrix-pattern': 'linear-gradient(0deg, rgba(57, 255, 20, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(57, 255, 20, 0.1) 1px, transparent 1px)'
+				'cyber-grid': 'linear-gradient(rgba(234, 56, 76, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(234, 56, 76, 0.1) 1px, transparent 1px)',
+				'matrix-pattern': 'linear-gradient(0deg, rgba(234, 56, 76, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(234, 56, 76, 0.1) 1px, transparent 1px)'
 			},
 			backgroundSize: {
 				'cyber-grid': '25px 25px',
