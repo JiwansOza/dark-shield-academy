@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Badge } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 interface Certification {
   id: number;
@@ -10,6 +11,7 @@ interface Certification {
   organization: string;
   description: string;
   image: string;
+  slug: string;
 }
 
 const CertificationsSection = () => {
@@ -19,35 +21,40 @@ const CertificationsSection = () => {
       name: "Certified Ethical Hacker (CEH)",
       organization: "EC-Council Global Services (EGS)",
       description: "Internationally recognized certification for ethical hackers and penetration testers.",
-      image: "/placeholder.svg"
+      image: "/placeholder.svg",
+      slug: "ceh"
     },
     {
       id: 2,
       name: "CompTIA Security+",
       organization: "CompTIA",
       description: "Foundational certification covering essential security concepts and best practices.",
-      image: "/placeholder.svg"
+      image: "/placeholder.svg",
+      slug: "security-plus"
     },
     {
       id: 3,
       name: "Certified Forensic Investigator (CFI)",
       organization: "Indian Cyber Security Council",
       description: "Specialized certification for digital forensic investigation techniques.",
-      image: "/placeholder.svg"
+      image: "/placeholder.svg",
+      slug: "cfi"
     },
     {
       id: 4,
       name: "Certified Network Defender (CND)",
       organization: "EC-Council Global Services (EGS)",
       description: "Certification focused on network security and defense mechanisms.",
-      image: "/placeholder.svg"
+      image: "/placeholder.svg",
+      slug: "cnd"
     },
     {
       id: 5,
       name: "Certified Incident Handler (CIH)",
       organization: "Indian Cyber Security Council",
       description: "Certification for professionals specializing in incident response and management.",
-      image: "/placeholder.svg"
+      image: "/placeholder.svg",
+      slug: "cih"
     }
   ];
 
@@ -117,9 +124,9 @@ const CertificationsSection = () => {
                     <div className="text-center">
                       <h4 className="text-cyber-blue font-bold mb-2">{cert.name}</h4>
                       <p className="text-white mb-4">{cert.description}</p>
-                      <button className="cyber-button text-cyber-green text-sm">
+                      <Link to={`/certification/${cert.slug}`} className="cyber-button text-cyber-green text-sm inline-block">
                         Learn More
-                      </button>
+                      </Link>
                     </div>
                   </motion.div>
                 </motion.div>

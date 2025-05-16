@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Shield, Book, Network, CircuitBoard, Grid2X2, Award } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 interface Course {
   id: number;
@@ -11,6 +12,7 @@ interface Course {
   duration: string;
   level: string;
   outcomes: string[];
+  slug: string;
 }
 
 const CoursesSection = () => {
@@ -24,7 +26,8 @@ const CoursesSection = () => {
       icon: <Shield className="h-8 w-8 text-cyber-blue" />,
       duration: "12 Weeks",
       level: "Intermediate to Advanced",
-      outcomes: ["CEH Certification", "Penetration Testing Skills", "Security Assessment"]
+      outcomes: ["CEH Certification", "Penetration Testing Skills", "Security Assessment"],
+      slug: "ethical-hacking"
     },
     {
       id: 2,
@@ -33,7 +36,8 @@ const CoursesSection = () => {
       icon: <Book className="h-8 w-8 text-cyber-blue" />,
       duration: "10 Weeks",
       level: "All Levels",
-      outcomes: ["Evidence Collection", "Data Recovery", "Legal Procedures"]
+      outcomes: ["Evidence Collection", "Data Recovery", "Legal Procedures"],
+      slug: "digital-forensics"
     },
     {
       id: 3,
@@ -42,7 +46,8 @@ const CoursesSection = () => {
       icon: <Network className="h-8 w-8 text-cyber-blue" />,
       duration: "8 Weeks",
       level: "Intermediate",
-      outcomes: ["Network Analysis", "Mobile Evidence Recovery", "Case Building"]
+      outcomes: ["Network Analysis", "Mobile Evidence Recovery", "Case Building"],
+      slug: "network-forensics"
     },
     {
       id: 4,
@@ -51,7 +56,8 @@ const CoursesSection = () => {
       icon: <CircuitBoard className="h-8 w-8 text-cyber-blue" />,
       duration: "6 Weeks",
       level: "Advanced",
-      outcomes: ["Threat Detection", "Incident Containment", "Recovery Planning"]
+      outcomes: ["Threat Detection", "Incident Containment", "Recovery Planning"],
+      slug: "incident-response"
     },
     {
       id: 5,
@@ -60,7 +66,8 @@ const CoursesSection = () => {
       icon: <Grid2X2 className="h-8 w-8 text-cyber-blue" />,
       duration: "4 Weeks",
       level: "All Levels",
-      outcomes: ["Legal Knowledge", "Compliance Skills", "Case Documentation"]
+      outcomes: ["Legal Knowledge", "Compliance Skills", "Case Documentation"],
+      slug: "cyber-law"
     },
     {
       id: 6,
@@ -69,7 +76,8 @@ const CoursesSection = () => {
       icon: <Award className="h-8 w-8 text-cyber-blue" />,
       duration: "16 Weeks",
       level: "Advanced",
-      outcomes: ["Industry Certification", "Practical Skills", "Career Advancement"]
+      outcomes: ["Industry Certification", "Practical Skills", "Career Advancement"],
+      slug: "advanced-certification"
     }
   ];
 
@@ -139,18 +147,18 @@ const CoursesSection = () => {
                   </div>
                 </motion.div>
                 
-                <button className="mt-4 cyber-button w-full text-center text-cyber-blue">
+                <Link to={`/course/${course.slug}`} className="mt-4 cyber-button w-full text-center text-cyber-blue block">
                   Learn More
-                </button>
+                </Link>
               </div>
             </motion.div>
           ))}
         </div>
         
         <div className="text-center mt-12">
-          <a href="/courses" className="cyber-button px-8 py-3 text-cyber-green">
+          <Link to="/courses" className="cyber-button px-8 py-3 text-cyber-green">
             View All Courses
-          </a>
+          </Link>
         </div>
       </div>
     </section>
