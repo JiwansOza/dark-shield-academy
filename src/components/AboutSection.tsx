@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import { BookOpen } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface TimelineItem {
   year: string;
@@ -9,6 +10,18 @@ interface TimelineItem {
 }
 
 const AboutSection = () => {
+  const [animationsLoaded, setAnimationsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Ensure animations are visible after component mounts
+    const timer = setTimeout(() => {
+      setAnimationsLoaded(true);
+      console.log("Animations should be visible now");
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const timelineItems: TimelineItem[] = [
     {
       year: "2010",
@@ -54,12 +67,14 @@ const AboutSection = () => {
       <div className="absolute inset-0 bg-cyber-grid opacity-5"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 relative">
           <motion.div 
             className="inline-flex items-center justify-center p-2 bg-cyber-blue/10 rounded-full mb-4"
             initial={{ opacity: 0 }}
+            animate={{ opacity: animationsLoaded ? 1 : 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
           >
             <BookOpen className="h-6 w-6 text-cyber-blue" />
           </motion.div>
@@ -67,8 +82,10 @@ const AboutSection = () => {
           <motion.h2 
             className="text-3xl md:text-4xl font-bold text-white mb-4"
             initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: animationsLoaded ? 1 : 0, y: animationsLoaded ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             About <span className="text-cyber-blue">CFII</span>
           </motion.h2>
@@ -76,16 +93,17 @@ const AboutSection = () => {
           <motion.p 
             className="text-gray-400 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: animationsLoaded ? 1 : 0, y: animationsLoaded ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             The Cyber Forensic Institute of India (CFII) is India's trusted institution for cyber forensics, cybersecurity, and digital crime investigation training. Our mission is to build a safer digital India by empowering professionals with cutting-edge skills.
           </motion.p>
         </div>
         
         {/* Timeline Section */}
-        <div className="max-w-4xl mx-auto mb-20">
+        <div className="max-w-4xl mx-auto mb-20 relative">
           <h3 className="text-2xl font-bold text-white mb-10 text-center">
             Our <span className="text-cyber-blue">Journey</span>
           </h3>
@@ -98,11 +116,12 @@ const AboutSection = () => {
             {timelineItems.map((item, index) => (
               <motion.div 
                 key={index}
-                className={`mb-12 flex flex-col md:flex-row ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                className={`mb-12 flex flex-col md:flex-row relative ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
                 initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: animationsLoaded ? 1 : 0, y: animationsLoaded ? 0 : 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: Math.min(0.1 + index * 0.1, 0.8) }}
               >
                 <div className="md:w-1/2 p-4"></div>
                 
@@ -122,16 +141,21 @@ const AboutSection = () => {
           </div>
         </div>
         
-        {/* Stats Section */}
+        {/* Stats Section - With immediate fallback display */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
           {statsItems.map((stat, index) => (
             <motion.div
               key={index}
-              className="glass-card p-6 rounded-lg text-center"
+              className="glass-card p-6 rounded-lg text-center relative"
               initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: animationsLoaded ? 1 : 0, scale: animationsLoaded ? 1 : 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: Math.min(0.1 + index * 0.1, 0.5) }}
+              style={{ 
+                opacity: animationsLoaded ? undefined : 1, // Fallback opacity
+                transform: animationsLoaded ? undefined : 'scale(1)' // Fallback scale
+              }}
             >
               <h4 className="text-3xl md:text-4xl font-bold text-cyber-blue mb-2">{stat.value}</h4>
               <p className="text-gray-400">{stat.label}</p>
@@ -139,14 +163,19 @@ const AboutSection = () => {
           ))}
         </div>
         
-        {/* Mission & Vision */}
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Mission & Vision - With immediate fallback display */}
+        <div className="grid md:grid-cols-2 gap-8 relative">
           <motion.div 
             className="glass-card p-8 rounded-lg"
             initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: animationsLoaded ? 1 : 0, x: animationsLoaded ? 0 : -50 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            style={{ 
+              opacity: animationsLoaded ? undefined : 1, // Fallback opacity
+              transform: animationsLoaded ? undefined : 'translateX(0)' // Fallback position
+            }}
           >
             <h3 className="text-2xl font-bold text-white mb-4">Our Mission</h3>
             <p className="text-gray-400">
@@ -157,9 +186,14 @@ const AboutSection = () => {
           <motion.div 
             className="glass-card p-8 rounded-lg"
             initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: animationsLoaded ? 1 : 0, x: animationsLoaded ? 0 : 50 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            style={{ 
+              opacity: animationsLoaded ? undefined : 1, // Fallback opacity
+              transform: animationsLoaded ? undefined : 'translateX(0)' // Fallback position
+            }}
           >
             <h3 className="text-2xl font-bold text-white mb-4">Our Vision</h3>
             <p className="text-gray-400">
